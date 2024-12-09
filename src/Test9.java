@@ -18,7 +18,7 @@ public class Test9 {
         students.add(st4);
         students.add(st5);
 
-        Map<Integer, List<Student>> map = students.stream().map(e -> {
+        /*Map<Integer, List<Student>> map = students.stream().map(e -> {
             e.setName(e.getName().toUpperCase());
             return e;
         }).collect(Collectors.groupingBy(e -> e.getCourse()));
@@ -26,5 +26,15 @@ public class Test9 {
         for (Map.Entry<Integer, List<Student>> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue().toString());
         }
+        */
+
+        Map<Boolean, List<Student>> map =
+                students.stream().collect(Collectors.partitioningBy(e -> e.getAvgGrade() > 7));
+
+        for (Map.Entry<Boolean, List<Student>> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().toString());
+        }
+
+
     }
 }
